@@ -64,13 +64,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                calendar.add(Calendar.SECOND, 3);
+                calendar.add(Calendar.SECOND, 10);
                 //setAlarmText("You clicked a button");
 
                 final int hour = alarmTimePicker.getCurrentHour();
                 final int minute = alarmTimePicker.getCurrentMinute();;
 
-                Log.e("MyActivity", "In the receiver with " + hour + " and " + minute);
+                Log.e("MyActivity", "In the main with " + hour + " and " + minute);
                 setAlarmText("You clicked a " + hour + " and " + minute);
 
 
