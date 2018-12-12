@@ -11,12 +11,17 @@ import android.os.Build;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class RingtonePlayingService extends Service {
 
+    private List<Integer> allSongs;
     private boolean isRunning;
     private Context context;
     MediaPlayer mMediaPlayer;
@@ -30,22 +35,39 @@ public class RingtonePlayingService extends Service {
         return null;
     }
 
+    /**
+     * The method gets a list of all the resources ids in raw
+     * @return
+     */
+    public List<Integer> listRaw(){
+        List<Integer> allResources = new ArrayList<>();
+        Field[] fields=R.raw.class.getFields();
+        for(int count=0; count < fields.length; count++){
+            Log.i("Raw Asset: ", fields[count].getName());
+            int mediaId = this.getResources().getIdentifier(fields[count].getName(),
+                    "raw",
+                    this.getPackageName());
+            allResources.add(mediaId);
+        }
+        return allResources;
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public int onStartCommand(Intent intent, int flags, int startId)
     {
-
+        allSongs = listRaw();
+        context = AlarmApplication.getAppContext();
         final NotificationManager mNM = (NotificationManager)
                 getSystemService(NOTIFICATION_SERVICE);
 
         Intent intent1 = new Intent(this.getApplicationContext(), MainActivity.class);
-        PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent1, 0);
+        PendingIntent pIntent = PendingIntent.getActivity(context, 0, intent1, 0);
 
-        Notification mNotify  = new Notification.Builder(this)
+        Notification mNotify  = new NotificationCompat.Builder(context)
                 .setContentTitle("Richard Dawkins is talking" + "!")
                 .setContentText("Click me!")
-                .setSmallIcon(R.drawable.ic_action_call)
+                .setSmallIcon(R.drawable.notification_icon)
                 .setContentIntent(pIntent)
                 .setAutoCancel(true)
                 .build();
@@ -71,46 +93,23 @@ public class RingtonePlayingService extends Service {
         if(!this.isRunning && startId == 1) {
             Log.e("if there was not sound ", " and you want start");
 
-            int min = 1;
-            int max = 9;
-
             Random r = new Random();
-            int random_number = r.nextInt(max - min + 1) + min;
+            int random_number = r.nextInt(allSongs.size());
             Log.e("random number is ", String.valueOf(random_number));
 
-            if (random_number == 1) {
-                mMediaPlayer = MediaPlayer.create(this, R.raw.richard_dawkins_1);
-            }
-            else if (random_number == 2) {
-                mMediaPlayer = MediaPlayer.create(this, R.raw.richard_dawkins_2);
-            }
-            else if (random_number == 3) {
-                mMediaPlayer = MediaPlayer.create(this, R.raw.richard_dawkins_3);
-            }
-            else if (random_number == 4) {
-                mMediaPlayer = MediaPlayer.create(this, R.raw.richard_dawkins_4);
-            }
-            else if (random_number == 5) {
-                mMediaPlayer = MediaPlayer.create(this, R.raw.richard_dawkins_5);
-            }
-            else if (random_number == 6) {
-                mMediaPlayer = MediaPlayer.create(this, R.raw.richard_dawkins_6);
-            }
-            else if (random_number == 7) {
-                mMediaPlayer = MediaPlayer.create(this, R.raw.richard_dawkins_7);
-            }
-            else if (random_number == 8) {
-                mMediaPlayer = MediaPlayer.create(this, R.raw.richard_dawkins_8);
-            }
-            else {
-                mMediaPlayer = MediaPlayer.create(this, R.raw.richard_dawkins_1);
-            }
+            mMediaPlayer = MediaPlayer.create(this, allSongs.get(random_number));
+
+/*            if (random_number == 1) {
+                mMediaPlayer = MediaPlayer.create(this, R.raw.angles);
+            } else {
+                mMediaPlayer = MediaPlayer.create(this, R.raw.dont_stop_me_now);
+            }*/
             //mMediaPlayer = MediaPlayer.create(this, R.raw.richard_dawkins_1);
 
             mMediaPlayer.start();
 
 
-            mNM.notify(0, mNotify);
+            //mNM.notify(0, mNotify);
 
             this.isRunning = true;
             this.startId = 0;
