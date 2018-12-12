@@ -7,12 +7,18 @@ import android.content.Context;
 public class AlarmApplication extends Application {
     private static Context applicationContext;
     private static NotificationManager notificationManager;
+    private static AlarmClockManager alarmClockManager;
 
     @Override
     public void onCreate() {
         super.onCreate();
         AlarmApplication.applicationContext = getApplicationContext();
         notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        alarmClockManager = new AlarmClockManager();
+    }
+
+    public static AlarmClockManager getAlarmClockApplication() {
+        return alarmClockManager;
     }
 
     public static NotificationManager getNotificationManager() {

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Random Alarm Music 2</string>
+    <string name="title_activity_snooze_and_stop_alarm">SnoozeAndStopAlarmActivity</string>
 </resources>
