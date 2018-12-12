@@ -59,8 +59,6 @@ public class RingtonePlayingService extends Service {
     {
         allSongs = listRaw();
         context = AlarmApplication.getAppContext();
-        final NotificationManager mNM = (NotificationManager)
-                getSystemService(NOTIFICATION_SERVICE);
 
         Intent intent1 = new Intent(this.getApplicationContext(), MainActivity.class);
         PendingIntent pIntent = PendingIntent.getActivity(context, 0, intent1, 0);
@@ -110,7 +108,7 @@ public class RingtonePlayingService extends Service {
             mMediaPlayer.start();
 
 
-            mNM.notify(0, mNotify);
+            AlarmApplication.getNotificationManager().notify(0, mNotify);
 
             this.isRunning = true;
             this.startId = 0;
