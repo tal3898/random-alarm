@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="learnenglish.taban.com.randomalarmmusic2">
 
-    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY"/>
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
 
     <application
         android:name=".AlarmApplication"
@@ -23,13 +23,11 @@
 
         <receiver android:name=".AlarmReceiver" />
 
-        <service android:name=".RingtonePlayingService"
-            android:enabled="true">
-        </service>
+        <service
+            android:name=".RingtonePlayingService"
+            android:enabled="true"></service>
 
+        <activity android:name=".SavedAlarms"></activity>
     </application>
-
-
-
 
 </manifest>
