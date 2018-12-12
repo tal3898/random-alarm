@@ -60,7 +60,7 @@ public class RingtonePlayingService extends Service {
         allSongs = listRaw();
         context = AlarmApplication.getAppContext();
 
-        Intent intent1 = new Intent(this.getApplicationContext(), MainActivity.class);
+        Intent intent1 = new Intent(this.getApplicationContext(), SnoozeAndStopAlarmActivity.class);
         PendingIntent pIntent = PendingIntent.getActivity(context, 0, intent1, 0);
 
         @SuppressLint("WrongConstant") Notification mNotify  = new Notification.Builder(context)
@@ -97,14 +97,6 @@ public class RingtonePlayingService extends Service {
             Log.e("random number is ", String.valueOf(random_number));
 
             mMediaPlayer = MediaPlayer.create(this, allSongs.get(random_number));
-
-/*            if (random_number == 1) {
-                mMediaPlayer = MediaPlayer.create(this, R.raw.angles);
-            } else {
-                mMediaPlayer = MediaPlayer.create(this, R.raw.dont_stop_me_now);
-            }*/
-            //mMediaPlayer = MediaPlayer.create(this, R.raw.richard_dawkins_1);
-
             mMediaPlayer.start();
 
 

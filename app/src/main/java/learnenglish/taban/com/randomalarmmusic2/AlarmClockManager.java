@@ -20,9 +20,9 @@ public class AlarmClockManager {
         this.alarmManager = alarmManager;
     }
 
-    public void addAlarm(Integer hour, Integer minute) {
+    public void addAlarm(Integer hour, Integer minute, Integer seconds) {
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.SECOND, 10);
+        calendar.add(Calendar.SECOND, seconds);
 
         Log.e("MyActivity", "In the main with " + hour + " and " + minute);
 

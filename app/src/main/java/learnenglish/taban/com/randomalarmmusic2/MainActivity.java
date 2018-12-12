@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
                 final int hour = alarmTimePicker.getCurrentHour();
                 final int minute = alarmTimePicker.getCurrentMinute();;
-                AlarmApplication.getAlarmClockApplication().addAlarm(hour, minute);
+                AlarmApplication.getAlarmClockApplication().addAlarm(hour, minute, 10);
 
             }
 
