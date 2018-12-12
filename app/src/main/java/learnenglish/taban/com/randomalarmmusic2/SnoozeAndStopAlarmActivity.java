@@ -48,6 +48,22 @@ public class SnoozeAndStopAlarmActivity extends AppCompatActivity {
         AlarmApplication.getAlarmClockApplication()
                 .addAlarm(date.getHours(), date.getMinutes(),SNOOZE_MINUTES_INTERVAL+5);
 
+        // Exit the app
+        finish();
+        System.exit(0);
 
+    }
+
+    public void onStopAlarm(View view) {
+        Log.i("TAL", "stop the alarm");
+
+        // Stop the alarm
+        Intent myIntent = new Intent(SnoozeAndStopAlarmActivity.this, AlarmReceiver.class);
+        myIntent.putExtra("extra", "no");
+        sendBroadcast(myIntent);
+
+        // Exit the app
+        finish();
+        System.exit(0);
     }
 }
