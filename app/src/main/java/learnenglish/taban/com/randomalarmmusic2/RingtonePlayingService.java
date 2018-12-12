@@ -1,5 +1,6 @@
 package learnenglish.taban.com.randomalarmmusic2;
 
+import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -64,12 +65,12 @@ public class RingtonePlayingService extends Service {
         Intent intent1 = new Intent(this.getApplicationContext(), MainActivity.class);
         PendingIntent pIntent = PendingIntent.getActivity(context, 0, intent1, 0);
 
-        Notification mNotify  = new Notification.Builder(context)
-                .setContentTitle("Richard Dawkins is talking" + "!")
-                .setContentText("Click me!")
+        @SuppressLint("WrongConstant") Notification mNotify  = new Notification.Builder(context)
+                .setContentTitle("Wake up man")
                 .setSmallIcon(R.drawable.notification_icon)
                 .setContentIntent(pIntent)
                 .setAutoCancel(true)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .build();
 
         String state = intent.getExtras().getString("extra");
