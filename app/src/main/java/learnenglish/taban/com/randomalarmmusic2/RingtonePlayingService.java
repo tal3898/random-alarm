@@ -64,7 +64,7 @@ public class RingtonePlayingService extends Service {
         Intent intent1 = new Intent(this.getApplicationContext(), MainActivity.class);
         PendingIntent pIntent = PendingIntent.getActivity(context, 0, intent1, 0);
 
-        Notification mNotify  = new NotificationCompat.Builder(context)
+        Notification mNotify  = new Notification.Builder(context)
                 .setContentTitle("Richard Dawkins is talking" + "!")
                 .setContentText("Click me!")
                 .setSmallIcon(R.drawable.notification_icon)
@@ -109,7 +109,7 @@ public class RingtonePlayingService extends Service {
             mMediaPlayer.start();
 
 
-            //mNM.notify(0, mNotify);
+            mNM.notify(0, mNotify);
 
             this.isRunning = true;
             this.startId = 0;
