@@ -8,6 +8,7 @@ import android.util.Log;
 import java.util.Calendar;
 
 import learnenglish.taban.com.randomalarmmusic2.datamodels.AlarmSetState;
+import learnenglish.taban.com.randomalarmmusic2.logger.ProgramLogger;
 
 import static android.content.Context.ALARM_SERVICE;
 
@@ -23,12 +24,10 @@ public class AlarmClockManager {
     }
 
     public void addAlarm(Integer hour, Integer minute, Integer seconds) {
+        ProgramLogger.info("Adding new alarm clock: " + hour + ":" + minute);
+
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.SECOND, seconds);
-
-        Log.e("MyActivity", "In the main with " + hour + " and " + minute);
-
-
         calendar.set(Calendar.HOUR_OF_DAY, hour);
         calendar.set(Calendar.MINUTE, minute);
 
@@ -39,8 +38,8 @@ public class AlarmClockManager {
                 0,
                 myIntent,
                 PendingIntent.FLAG_UPDATE_CURRENT);
+        ProgramLogger.info("Set extra data: " + AlarmSetState.NEW_ALARM.toString());
 
         alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pending_intent);
-
     }
 }

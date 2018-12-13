@@ -21,6 +21,8 @@ import java.util.Random;
 
 import learnenglish.taban.com.randomalarmmusic2.activities.SnoozeAndStopAlarmActivity;
 import learnenglish.taban.com.randomalarmmusic2.datamodels.AlarmSetState;
+import learnenglish.taban.com.randomalarmmusic2.logger.ProgramLogger;
+import learnenglish.taban.com.randomalarmmusic2.logger.UILogger;
 
 public class RingtonePlayingService extends Service {
 
@@ -34,7 +36,7 @@ public class RingtonePlayingService extends Service {
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        Log.e("MyActivity", "In the Richard service");
+        ProgramLogger.info("On bind in RingtonePlayingService");
         return null;
     }
 
@@ -46,7 +48,6 @@ public class RingtonePlayingService extends Service {
         List<Integer> allResources = new ArrayList<>();
         Field[] fields=R.raw.class.getFields();
         for(int count=0; count < fields.length; count++){
-            Log.i("Raw Asset: ", fields[count].getName());
             int mediaId = this.getResources().getIdentifier(fields[count].getName(),
                     "raw",
                     this.getPackageName());
@@ -75,8 +76,6 @@ public class RingtonePlayingService extends Service {
 
         AlarmSetState state = AlarmSetState.valueOf(intent.getExtras().getString("extra"));
 
-        Log.e("what is going on here  ", state.toString());
-
         assert state != null;
         switch (state) {
             case STOP:
@@ -90,15 +89,13 @@ public class RingtonePlayingService extends Service {
                 break;
         }
 
-
+        // There is no sound, and the user wants to start
         if(!this.isRunning && startId == 1) {
-            Log.e("if there was not sound ", " and you want start");
-
             Random r = new Random();
-            int random_number = r.nextInt(allSongs.size());
-            Log.e("random number is ", String.valueOf(random_number));
+            int randomNumber = r.nextInt(allSongs.size());
+            ProgramLogger.info("random number: " + randomNumber + ", song resource id: " + allSongs.get(randomNumber));
 
-            mMediaPlayer = MediaPlayer.create(this, allSongs.get(random_number));
+            mMediaPlayer = MediaPlayer.create(this, allSongs.get(randomNumber));
             mMediaPlayer.start();
 
 
@@ -108,36 +105,25 @@ public class RingtonePlayingService extends Service {
             this.startId = 0;
 
         }
+        // There is no sound, and the user wants the end
         else if (!this.isRunning && startId == 0){
-            Log.e("if there was not sound ", " and you want end");
-
             this.isRunning = false;
             this.startId = 0;
-
         }
-
+        // There is sound, and the user wants to start a sound
         else if (this.isRunning && startId == 1){
-            Log.e("if there is sound ", " and you want start");
-
             this.isRunning = true;
             this.startId = 0;
-
         }
+        // If there is sound, and the user wants to end
         else {
-            Log.e("if there is sound ", " and you want end");
-
             mMediaPlayer.stop();
             mMediaPlayer.reset();
 
             this.isRunning = false;
             this.startId = 0;
         }
-
-
-        Log.e("MyActivity", "In the service");
-
         return START_NOT_STICKY;
-
     }
 
 

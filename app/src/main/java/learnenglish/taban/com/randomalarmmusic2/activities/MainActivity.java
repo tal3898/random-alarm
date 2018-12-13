@@ -19,17 +19,15 @@ import learnenglish.taban.com.randomalarmmusic2.AlarmApplication;
 import learnenglish.taban.com.randomalarmmusic2.AlarmReceiver;
 import learnenglish.taban.com.randomalarmmusic2.R;
 import learnenglish.taban.com.randomalarmmusic2.datamodels.AlarmSetState;
+import learnenglish.taban.com.randomalarmmusic2.logger.ProgramLogger;
+import learnenglish.taban.com.randomalarmmusic2.logger.UILogger;
 
 public class MainActivity extends AppCompatActivity {
-
-
-
 
     private TimePicker alarmTimePicker;
     private TextView alarmTextView;
 
     private AlarmReceiver alarm;
-
 
     MainActivity inst;
     Context context;
@@ -64,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-
+                UILogger.info("Clicked the start alarm button");
                 final int hour = alarmTimePicker.getCurrentHour();
                 final int minute = alarmTimePicker.getCurrentMinute();;
                 AlarmApplication.getAlarmClockApplication().addAlarm(hour, minute, 10);
@@ -77,25 +75,9 @@ public class MainActivity extends AppCompatActivity {
         stop_alarm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-                int min = 1;
-                int max = 9;
-
-                Random r = new Random();
-                int random_number = r.nextInt(max - min + 1) + min;
-                Log.e("random number is ", String.valueOf(random_number));
-
+                UILogger.info("Clicked the stop alarm button");
                 myIntent.putExtra("extra", AlarmSetState.STOP.toString());
-                Log.i("TAL", "put extra: " + myIntent.getExtras().getString("extra"));
                 sendBroadcast(myIntent);
-/*
-                AlarmApplication.getAlarmClockApplication()
-                        .getAlarmManager()
-                        .cancel(pending_intent);*/
-                //alarmManager.cancel(pending_intent);
-                setAlarmText("Alarm canceled");
-                //setAlarmText("You clicked a " + " canceled");
             }
         });
 
@@ -116,8 +98,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
-
-        Log.e("MyActivity", "on Destroy");
     }
 
 

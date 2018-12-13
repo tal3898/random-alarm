@@ -15,6 +15,7 @@ import learnenglish.taban.com.randomalarmmusic2.AlarmApplication;
 import learnenglish.taban.com.randomalarmmusic2.AlarmReceiver;
 import learnenglish.taban.com.randomalarmmusic2.R;
 import learnenglish.taban.com.randomalarmmusic2.datamodels.AlarmSetState;
+import learnenglish.taban.com.randomalarmmusic2.logger.UILogger;
 
 public class SnoozeAndStopAlarmActivity extends AppCompatActivity {
 
@@ -34,16 +35,15 @@ public class SnoozeAndStopAlarmActivity extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void onSnoozeAlarm(View view) {
-        Log.i("TAL", "snoozed the alarm");
         //LocalDateTime nowTime = LocalDateTime.now();
         Date date = new Date();
+
+        UILogger.info("snoozed to " + date.getHours() + ":" + date.getMinutes() + ":" + SNOOZE_MINUTES_INTERVAL+5);
 
         // Stop the alarm
         Intent myIntent = new Intent(SnoozeAndStopAlarmActivity.this, AlarmReceiver.class);
         myIntent.putExtra("extra", AlarmSetState.SNOOZE.toString());
         sendBroadcast(myIntent);
-
-        Log.i("TAL", "snoozed to " + date.getHours() + ":" + date.getMinutes() + ":" + SNOOZE_MINUTES_INTERVAL+5);
 
         // Add a snooze
         AlarmApplication.getAlarmClockApplication()
@@ -56,7 +56,7 @@ public class SnoozeAndStopAlarmActivity extends AppCompatActivity {
     }
 
     public void onStopAlarm(View view) {
-        Log.i("TAL", "stop the alarm");
+        UILogger.info("Stopped the alarm clock");
 
         // Stop the alarm
         Intent myIntent = new Intent(SnoozeAndStopAlarmActivity.this, AlarmReceiver.class);
