@@ -1,23 +1,23 @@
-package learnenglish.taban.com.randomalarmmusic2;
+package learnenglish.taban.com.randomalarmmusic2.activities;
 
 import android.annotation.TargetApi;
 import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
-import java.util.Calendar;
 import java.util.Random;
+
+import learnenglish.taban.com.randomalarmmusic2.AlarmApplication;
+import learnenglish.taban.com.randomalarmmusic2.AlarmReceiver;
+import learnenglish.taban.com.randomalarmmusic2.R;
 
 public class MainActivity extends AppCompatActivity {
 

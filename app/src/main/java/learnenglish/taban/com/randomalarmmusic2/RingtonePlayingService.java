@@ -2,7 +2,6 @@ package learnenglish.taban.com.randomalarmmusic2;
 
 import android.annotation.SuppressLint;
 import android.app.Notification;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
@@ -19,6 +18,8 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import learnenglish.taban.com.randomalarmmusic2.activities.SnoozeAndStopAlarmActivity;
 
 public class RingtonePlayingService extends Service {
 

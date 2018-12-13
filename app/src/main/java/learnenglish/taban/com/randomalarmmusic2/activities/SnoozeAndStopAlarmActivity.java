@@ -1,19 +1,19 @@
-package learnenglish.taban.com.randomalarmmusic2;
+package learnenglish.taban.com.randomalarmmusic2.activities;
 
 import android.app.AlarmManager;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 
-import java.time.LocalDateTime;
 import java.util.Date;
+
+import learnenglish.taban.com.randomalarmmusic2.AlarmApplication;
+import learnenglish.taban.com.randomalarmmusic2.AlarmReceiver;
+import learnenglish.taban.com.randomalarmmusic2.R;
 
 public class SnoozeAndStopAlarmActivity extends AppCompatActivity {
 

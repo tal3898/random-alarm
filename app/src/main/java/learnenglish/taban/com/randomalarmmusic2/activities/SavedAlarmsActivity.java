@@ -1,9 +1,11 @@
-package learnenglish.taban.com.randomalarmmusic2;
+package learnenglish.taban.com.randomalarmmusic2.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class SavedAlarms extends AppCompatActivity {
+import learnenglish.taban.com.randomalarmmusic2.R;
+
+public class SavedAlarmsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

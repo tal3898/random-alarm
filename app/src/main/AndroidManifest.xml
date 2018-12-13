@@ -13,7 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,9 +27,9 @@
             android:name=".RingtonePlayingService"
             android:enabled="true" />
 
-        <activity android:name=".SavedAlarms" />
+        <activity android:name=".activities.SavedAlarmsActivity" />
         <activity
-            android:name=".SnoozeAndStopAlarmActivity"
+            android:name=".activities.SnoozeAndStopAlarmActivity"
             android:label="@string/title_activity_snooze_and_stop_alarm"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
