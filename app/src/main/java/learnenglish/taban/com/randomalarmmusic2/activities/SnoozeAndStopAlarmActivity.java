@@ -6,7 +6,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 
 import java.util.Date;
@@ -26,7 +25,7 @@ public class SnoozeAndStopAlarmActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_snooze_and_stop_alarm);
 
-        AlarmApplication.getAlarmClockApplication().setAlarmManager((AlarmManager) getSystemService(ALARM_SERVICE));
+        AlarmApplication.getAlarmClockManager().setAlarmManager((AlarmManager) getSystemService(ALARM_SERVICE));
 
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
@@ -46,8 +45,8 @@ public class SnoozeAndStopAlarmActivity extends AppCompatActivity {
         sendBroadcast(myIntent);
 
         // Add a snooze
-        AlarmApplication.getAlarmClockApplication()
-                .addAlarm(date.getHours(), date.getMinutes(),SNOOZE_MINUTES_INTERVAL+5);
+        AlarmApplication.getAlarmClockManager()
+                .addTemporaryAlarm(date.getHours(), date.getMinutes(),SNOOZE_MINUTES_INTERVAL+5, AlarmSetState.SNOOZE);
 
         // Exit the app
         finish();

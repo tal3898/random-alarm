@@ -23,7 +23,13 @@ public class AlarmClockManager {
         this.alarmManager = alarmManager;
     }
 
-    public void addAlarm(Integer hour, Integer minute, Integer seconds) {
+    /**
+     * The method creates a temporary alarm clock, which happens only onec
+     * @param hour
+     * @param minute
+     * @param seconds
+     */
+    public void addTemporaryAlarm(Integer hour, Integer minute, Integer seconds, AlarmSetState state) {
         ProgramLogger.info("Adding new alarm clock: " + hour + ":" + minute);
 
         Calendar calendar = Calendar.getInstance();
@@ -33,12 +39,12 @@ public class AlarmClockManager {
 
         Intent myIntent = new Intent(AlarmApplication.getAppContext(), AlarmReceiver.class);
 
-        myIntent.putExtra("extra", AlarmSetState.NEW_ALARM.toString());
+        myIntent.putExtra("extra", state.toString());
         PendingIntent pending_intent = PendingIntent.getBroadcast(AlarmApplication.getAppContext(),
                 0,
                 myIntent,
                 PendingIntent.FLAG_UPDATE_CURRENT);
-        ProgramLogger.info("Set extra data: " + AlarmSetState.NEW_ALARM.toString());
+        ProgramLogger.info("Set extra data: " + state.toString());
 
         alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pending_intent);
     }

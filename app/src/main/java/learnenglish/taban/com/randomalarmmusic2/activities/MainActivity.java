@@ -7,19 +7,15 @@ import android.content.Intent;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
-import java.util.Random;
-
 import learnenglish.taban.com.randomalarmmusic2.AlarmApplication;
 import learnenglish.taban.com.randomalarmmusic2.AlarmReceiver;
 import learnenglish.taban.com.randomalarmmusic2.R;
 import learnenglish.taban.com.randomalarmmusic2.datamodels.AlarmSetState;
-import learnenglish.taban.com.randomalarmmusic2.logger.ProgramLogger;
 import learnenglish.taban.com.randomalarmmusic2.logger.UILogger;
 
 public class MainActivity extends AppCompatActivity {
@@ -47,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         final Intent myIntent = new Intent(this.context, AlarmReceiver.class);
 
         // Get the alarm manager service
-        AlarmApplication.getAlarmClockApplication().setAlarmManager((AlarmManager) getSystemService(ALARM_SERVICE));
+        AlarmApplication.getAlarmClockManager().setAlarmManager((AlarmManager) getSystemService(ALARM_SERVICE));
 
         // set the alarm to the time that you picked
         //final Calendar calendar = Calendar.getInstance();
@@ -65,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                 UILogger.info("Clicked the start alarm button");
                 final int hour = alarmTimePicker.getCurrentHour();
                 final int minute = alarmTimePicker.getCurrentMinute();;
-                AlarmApplication.getAlarmClockApplication().addAlarm(hour, minute, 10);
+                AlarmApplication.getAlarmClockManager().addTemporaryAlarm(hour, minute, 10, AlarmSetState.NEW_ALARM);
 
             }
 

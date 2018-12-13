@@ -6,5 +6,6 @@ package learnenglish.taban.com.randomalarmmusic2.datamodels;
 public enum AlarmSetState {
     STOP,
     SNOOZE,
-    NEW_ALARM
+    NEW_ALARM,
+    OLD_ALARM_REPEAT
 }

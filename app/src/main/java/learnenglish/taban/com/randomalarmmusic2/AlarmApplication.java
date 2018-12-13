@@ -17,7 +17,7 @@ public class AlarmApplication extends Application {
         alarmClockManager = new AlarmClockManager();
     }
 
-    public static AlarmClockManager getAlarmClockApplication() {
+    public static AlarmClockManager getAlarmClockManager() {
         return alarmClockManager;
     }
 
