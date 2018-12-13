@@ -18,6 +18,7 @@ import java.util.Random;
 import learnenglish.taban.com.randomalarmmusic2.AlarmApplication;
 import learnenglish.taban.com.randomalarmmusic2.AlarmReceiver;
 import learnenglish.taban.com.randomalarmmusic2.R;
+import learnenglish.taban.com.randomalarmmusic2.datamodels.AlarmSetState;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -85,7 +86,8 @@ public class MainActivity extends AppCompatActivity {
                 int random_number = r.nextInt(max - min + 1) + min;
                 Log.e("random number is ", String.valueOf(random_number));
 
-                myIntent.putExtra("extra", "no");
+                myIntent.putExtra("extra", AlarmSetState.STOP.toString());
+                Log.i("TAL", "put extra: " + myIntent.getExtras().getString("extra"));
                 sendBroadcast(myIntent);
 /*
                 AlarmApplication.getAlarmClockApplication()

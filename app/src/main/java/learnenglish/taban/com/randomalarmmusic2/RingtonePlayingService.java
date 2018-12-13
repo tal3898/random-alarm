@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Random;
 
 import learnenglish.taban.com.randomalarmmusic2.activities.SnoozeAndStopAlarmActivity;
+import learnenglish.taban.com.randomalarmmusic2.datamodels.AlarmSetState;
 
 public class RingtonePlayingService extends Service {
 
@@ -72,20 +73,20 @@ public class RingtonePlayingService extends Service {
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .build();
 
-        String state = intent.getExtras().getString("extra");
+        AlarmSetState state = AlarmSetState.valueOf(intent.getExtras().getString("extra"));
 
-        Log.e("what is going on here  ", state);
+        Log.e("what is going on here  ", state.toString());
 
         assert state != null;
         switch (state) {
-            case "no":
+            case STOP:
                 startId = 0;
                 break;
-            case "yes":
+            case NEW_ALARM:
                 startId = 1;
                 break;
-            default:
-                startId = 0;
+            case SNOOZE:
+                startId = 1;
                 break;
         }
 

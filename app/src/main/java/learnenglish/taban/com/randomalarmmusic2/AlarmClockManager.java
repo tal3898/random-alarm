@@ -7,6 +7,8 @@ import android.util.Log;
 
 import java.util.Calendar;
 
+import learnenglish.taban.com.randomalarmmusic2.datamodels.AlarmSetState;
+
 import static android.content.Context.ALARM_SERVICE;
 
 public class AlarmClockManager {
@@ -32,7 +34,7 @@ public class AlarmClockManager {
 
         Intent myIntent = new Intent(AlarmApplication.getAppContext(), AlarmReceiver.class);
 
-        myIntent.putExtra("extra", "yes");
+        myIntent.putExtra("extra", AlarmSetState.NEW_ALARM.toString());
         PendingIntent pending_intent = PendingIntent.getBroadcast(AlarmApplication.getAppContext(),
                 0,
                 myIntent,

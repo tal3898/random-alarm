@@ -14,6 +14,7 @@ import java.util.Date;
 import learnenglish.taban.com.randomalarmmusic2.AlarmApplication;
 import learnenglish.taban.com.randomalarmmusic2.AlarmReceiver;
 import learnenglish.taban.com.randomalarmmusic2.R;
+import learnenglish.taban.com.randomalarmmusic2.datamodels.AlarmSetState;
 
 public class SnoozeAndStopAlarmActivity extends AppCompatActivity {
 
@@ -39,7 +40,7 @@ public class SnoozeAndStopAlarmActivity extends AppCompatActivity {
 
         // Stop the alarm
         Intent myIntent = new Intent(SnoozeAndStopAlarmActivity.this, AlarmReceiver.class);
-        myIntent.putExtra("extra", "no");
+        myIntent.putExtra("extra", AlarmSetState.SNOOZE.toString());
         sendBroadcast(myIntent);
 
         Log.i("TAL", "snoozed to " + date.getHours() + ":" + date.getMinutes() + ":" + SNOOZE_MINUTES_INTERVAL+5);
@@ -59,7 +60,8 @@ public class SnoozeAndStopAlarmActivity extends AppCompatActivity {
 
         // Stop the alarm
         Intent myIntent = new Intent(SnoozeAndStopAlarmActivity.this, AlarmReceiver.class);
-        myIntent.putExtra("extra", "no");
+        myIntent.putExtra("extra", AlarmSetState.STOP.toString());
+
         sendBroadcast(myIntent);
 
         // Exit the app
